@@ -118,10 +118,13 @@ function dataProcessorInternal(rawData) {
 async function processTSVData(fileName) {
   const resultData = await cacheLookup(fileName);
   console.log(resultData);
+
+  //Initialize the panel after data load
   panel.removeAll();
   const id = panel.addView();
   const plotVars = plotter.initializeChart(id, 460, 400);
-  plotter.render(resultData, plotVars, "tsne1", "tsne2", "celltype");
+  plotter.render(resultData, plotVars, "tsne1", "tsne2", "stim");
+  panel.createControlPanel(id,resultData);
     // const plotVars2 = plotter.initializeChart("my_dataviz1", 460, 400);
     // plotter.render(resultData,plotVars2,"tsne1", "tsne2", "multiplets");
     // const plotVars3 = plotter.initializeChart("my_dataviz2", 460, 400);

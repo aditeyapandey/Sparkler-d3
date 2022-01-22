@@ -86,7 +86,7 @@
         .selectAll(".dot")
         .transition()
         .duration(200)
-        .style("opacity", 0.1)
+        .style("opacity", 0)
         .attr("r", 2);
 
       d3.select("#" + divId)
