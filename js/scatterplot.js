@@ -4,6 +4,10 @@
 
   plotter.render = function (finalData,plot, xField, yField, colorField) {
       const data = finalData.jsonData;
+      const colorFieldDomain = [...finalData.metaData[colorField].range];
+      const colorRange = finalData.metaData[colorField].colorMap;
+      console.log(colorRange)
+
       // Add X axis
       x = d3
         .scaleLinear()
@@ -47,8 +51,8 @@
       // Color scale: give me a specie name, I return a color
       color = d3
         .scaleOrdinal()
-        .domain(["ctrl", "stim"])
-        .range(["#440154ff", "#21908dff"]);
+        .domain(colorFieldDomain)
+        .range(colorRange);
 
       // Add dots
       plot.svg
@@ -105,18 +109,20 @@
     const legend = d3
       .select("#" + divId)
       .append("div")
-      .attr("class", "legend  d-flex justify-content-center")
-      .style("height", "30px");
+      .attr("class", "legend container justify-content-center")
+      .style("max-height", "100%");
 
-    legend.append("span").text("Legend:").attr("class", "btn-light m-3 legendText")
+      const legnedItem = legend.append("div").attr("class","")
+
+      legnedItem.append("span").text("Legend:").attr("class", "legendText")
   
 
-    legend
+      legnedItem
       .selectAll("viewLegend")
       .data(color.domain())
       .join("span")
-      .attr("class", "btn-light m-3 legendText")
-      .text((d) => d)
+      .attr("class", "btn-light m-1 legendText")
+      .text((d) => "  "+ d )
       .style("color", (d) => color(d))
       .on("mouseover", highlight)
       .on("mouseout", doNotHighlight);;
