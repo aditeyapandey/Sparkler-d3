@@ -8,3 +8,9 @@
   {
       width:25%
   }
+
+  .legendText
+  {
+      cursor: pointer;
+      font-size: large;
+  }

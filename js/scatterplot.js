@@ -1,12 +1,10 @@
 // set the dimensions and margins of the graph
 (function () {
-  plot = {};
+  plotter = {};
 
-  plot.render = function (plot, xField, yField, colorField) {
+  plotter.render = function (plot, xField, yField, colorField) {
     //Read the data
     d3.tsv("data/GSE96583_batch2.sub.tsv").then(function (data) {
-      
-
       // Add X axis
       x = d3
         .scaleLinear()
@@ -35,7 +33,7 @@
         .append("text")
         .attr("class", "axis-label")
         .attr("x", plot.width / 2)
-        .attr("y", 50)
+        .attr("y", 35)
         .text(xField);
 
       yAxisLabel
@@ -52,23 +50,6 @@
         .scaleOrdinal()
         .domain(["ctrl", "stim"])
         .range(["#440154ff", "#21908dff"]);
-
-      // Highlight the specie that is hovered
-      const highlight = function (event, d) {
-        const selected = d[colorField];
-
-        d3.select("#"+plot.visContainerId).selectAll(".dot")
-          .transition()
-          .duration(200)
-          .style("fill", "lightgrey")
-          .attr("r", 2);
-
-          d3.select("#"+plot.visContainerId).selectAll("." + selected)
-          .transition()
-          .duration(200)
-          .style("fill", color(selected))
-          .attr("r", 2);
-      };
 
       // Add dots
       plot.svg
@@ -89,11 +70,61 @@
         .style("fill", function (d) {
           return color(d[colorField]);
         })
-        .on("mouseover", highlight);
+
+      plotter.createLegend(plot.visContainerId, color);
     });
   };
 
-  plot.initializeChart = function (
+  plotter.createLegend = function (divId, color) {
+    // Highlight
+    const highlight = function (event, d) {
+      const selected = d;
+
+      d3.select("#" + divId)
+        .selectAll(".dot")
+        .transition()
+        .duration(200)
+        .style("opacity", 0.1)
+        .attr("r", 2);
+
+      d3.select("#" + divId)
+        .selectAll("." + selected)
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .attr("r", 2);
+    };
+
+    // Unhighlibht
+    const doNotHighlight = function (event, d) {
+      d3.select("#" + divId)
+        .selectAll(".dot")
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .attr("r", 2);
+    };
+    const legend = d3
+      .select("#" + divId)
+      .append("div")
+      .attr("class", "legend  d-flex justify-content-center")
+      .style("height", "30px");
+
+    legend.append("span").text("Legend:").attr("class", "btn-light m-3 legendText")
+  
+
+    legend
+      .selectAll("viewLegend")
+      .data(color.domain())
+      .join("span")
+      .attr("class", "btn-light m-3 legendText")
+      .text((d) => d)
+      .style("color", (d) => color(d))
+      .on("mouseover", highlight)
+      .on("mouseout", doNotHighlight);;
+  };
+
+  plotter.initializeChart = function (
     visContainerId,
     containerWidth,
     containerHeight
