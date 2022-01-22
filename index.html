@@ -85,11 +85,15 @@
     type="text/javascript"
     src="js/dataloader.js"
   ></script>
+  <script
+    language="javascript"
+    type="text/javascript"
+    src="js/main.js"
+  ></script>
   <script>
     const plotVars = plotter.initializeChart("my_dataviz", 460, 400);
     plotter.render(plotVars,"tsne1", "tsne2", "stim");
     const plotVars2 = plotter.initializeChart("my_dataviz1", 460, 400);
     plotter.render(plotVars2,"tsne1", "tsne2", "stim");
-    dataLoader.loadData();
   </script>
 </html>
