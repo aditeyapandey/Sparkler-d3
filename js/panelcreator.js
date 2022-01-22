@@ -43,7 +43,7 @@
       .text("X");
     const selectX = containerDiv
       .append("select")
-      .attr("id", id + "_X")
+      .attr("id", id + "_x")
       .attr("class", "custom-select")
       .on("change", onchange);
     selectX
@@ -64,7 +64,7 @@
       .text("Y");
     const selectY = containerDiv
       .append("select")
-      .attr("id", id + "_Y")
+      .attr("id", id + "_y")
       .attr("class", "custom-select")
       .on("change", onchange);
     selectY
@@ -85,7 +85,7 @@
       .text("Group");
     const selectG = containerDiv
       .append("select")
-      .attr("id", id + "_G")
+      .attr("id", id + "_color")
       .attr("class", "custom-select")
       .on("change", onchange);
     selectG
@@ -99,9 +99,13 @@
   };
 
   function onchange() {
+    let variableToUpdate = d3.select(this).attr("id").split("_")[1];
+    let updatedValue = d3.select(this).property("value");
     let idOfRelatedDiv = d3.select(this).attr("id").split("_")[0];
     let plotVars =
       window.currentSessionStorage.viewInformation[idOfRelatedDiv].plotVars;
+    
+    plotVars[variableToUpdate]  =  updatedValue
     d3.select("#" + plotVars.visContainerId)
       .select("svg")
       .selectAll("g")
@@ -117,6 +121,6 @@
       .select("*")
       .remove();
     let data = window.currentSessionStorage.data.resultData;
-    plotter.render(data, plotVars, "tsne1", "tsne2", "stim");
+    plotter.render(data, plotVars);
   }
 })();

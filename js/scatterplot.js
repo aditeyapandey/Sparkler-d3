@@ -2,15 +2,15 @@
 (function () {
   plotter = {};
 
-  plotter.render = function (finalData,plot, xField, yField, colorField) {
+  plotter.render = function (finalData,plot) {
       const data = finalData.jsonData;
-      const colorFieldDomain = [...finalData.metaData[colorField].range];
-      const colorRange = finalData.metaData[colorField].colorMap;
+      const colorFieldDomain = [...finalData.metaData[plot.color].range];
+      const colorRange = finalData.metaData[plot.color].colorMap;
 
       // Add X axis
      let x = d3
         .scaleLinear()
-        .domain(d3.extent(data.map((val) => parseFloat(val[xField]))))
+        .domain(d3.extent(data.map((val) => parseFloat(val[plot.x]))))
         .range([0, plot.width]);
       plot.svg
         .append("g")
@@ -21,7 +21,7 @@
       // Add Y axis
      let y = d3
         .scaleLinear()
-        .domain(d3.extent(data.map((val) => parseFloat(val[yField]))))
+        .domain(d3.extent(data.map((val) => parseFloat(val[plot.y]))))
         .range([plot.height, 0]);
       plot.svg.append("g").attr("class","axis").call(d3.axisLeft(y));
 
@@ -37,7 +37,7 @@
         .attr("class", "axis-label")
         .attr("x", plot.width / 2)
         .attr("y", 35)
-        .text(xField);
+        .text(plot.x);
 
       yAxisLabel
         .append("text")
@@ -46,7 +46,7 @@
         .attr("y", -30)
         .attr("transform", `rotate(-90)`)
         .style("text-anchor", "middle")
-        .text(yField);
+        .text(plot.y);
 
       // Color scale: give me a specie name, I return a color
       let color = d3
@@ -61,17 +61,17 @@
         .data(data)
         .join("circle")
         .attr("class", function (d) {
-          return `dot  + ${d[colorField]}`;
+          return `dot  + ${d[plot.color]}`;
         })
         .attr("cx", function (d) {
-          return x(d[xField]);
+          return x(d[plot.x]);
         })
         .attr("cy", function (d) {
-          return y(d[yField]);
+          return y(d[plot.y]);
         })
         .attr("r", 2)
         .style("fill", function (d) {
-          return color(d[colorField]);
+          return color(d[plot.color]);
         })
 
       plotter.createLegend(plot.visContainerId, color);
