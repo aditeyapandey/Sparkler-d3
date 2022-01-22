@@ -8,21 +8,22 @@
       const colorRange = finalData.metaData[colorField].colorMap;
 
       // Add X axis
-      x = d3
+     let x = d3
         .scaleLinear()
         .domain(d3.extent(data.map((val) => parseFloat(val[xField]))))
         .range([0, plot.width]);
       plot.svg
         .append("g")
+        .attr("class","axis")
         .attr("transform", `translate(0, ${plot.height})`)
         .call(d3.axisBottom(x));
 
       // Add Y axis
-      y = d3
+     let y = d3
         .scaleLinear()
         .domain(d3.extent(data.map((val) => parseFloat(val[yField]))))
         .range([plot.height, 0]);
-      plot.svg.append("g").call(d3.axisLeft(y));
+      plot.svg.append("g").attr("class","axis").call(d3.axisLeft(y));
 
       //Add Labels
       const xAxisLabel = plot.svg
@@ -48,7 +49,7 @@
         .text(yField);
 
       // Color scale: give me a specie name, I return a color
-      color = d3
+      let color = d3
         .scaleOrdinal()
         .domain(colorFieldDomain)
         .range(colorRange);
@@ -105,12 +106,10 @@
         .style("opacity", 1)
         .attr("r", 2);
     };
-    const legend = d3
-      .select("#" + divId)
-      .append("div")
-      .attr("class", "legend container justify-content-center")
-      .style("max-height", "100%");
 
+      const legend = d3
+      .select("#" + divId)
+      .select(".legend")
       const legnedItem = legend.append("div").attr("class","")
 
       legnedItem.append("span").text("Legend:").attr("class", "legendText")
