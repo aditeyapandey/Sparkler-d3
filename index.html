@@ -66,8 +66,12 @@
         <option value="GSE96583_batch2.sub.tsv">GSE96583_batch2.sub.tsv</option>
       </select>
     </div>
-    <div class="visualizationContainer">
-      <div id="my_dataviz"></div>
+    <div class="visualizationContainer container-md">
+      <div class="row">
+        <div id="my_dataviz" class="col-4"></div>
+        <div id="my_dataviz1" class="col-4"></div>
+
+      </div>
     </div>
   </body>
 
@@ -82,8 +86,10 @@
     src="js/dataloader.js"
   ></script>
   <script>
-    plot.initializeChart("my_dataviz", 460, 400);
-    plot.render("tsne1", "tsne2", "multiplets");
+    const plotVars = plot.initializeChart("my_dataviz", 460, 400);
+    plot.render(plotVars,"tsne1", "tsne2", "multiplets");
+    const plotVars2 = plot.initializeChart("my_dataviz1", 460, 400);
+    plot.render(plotVars2,"tsne1", "tsne2", "multiplets");
     dataLoader.loadData();
   </script>
 </html>
