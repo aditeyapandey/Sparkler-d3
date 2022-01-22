@@ -29,7 +29,8 @@
         .attr("id", "xAxisLabel")
         .attr("transform", `translate(0, ${plot.height})`);
 
-      const yAxisG = plot.svg.append("g");
+      const yAxisLabel = plot.svg.append("g").attr("id", "yAxisLabel")
+      ;
 
       xAxisLabel
         .append("text")
@@ -37,6 +38,15 @@
         .attr("x", plot.width / 2)
         .attr("y", 50)
         .text(xField);
+
+        yAxisLabel.append('text')
+        .attr('class', 'axis-label')
+        .attr('x', -plot.height / 2)
+        .attr('y', -30)
+        .attr('transform', `rotate(-90)`)
+        .style('text-anchor', 'middle')
+        .text(yField);
+  
 
       // Color scale: give me a specie name, I return a color
       color = d3
