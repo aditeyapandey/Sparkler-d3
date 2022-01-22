@@ -119,7 +119,7 @@ async function processTSVData(fileName) {
   const resultData = await cacheLookup(fileName);
   window.currentSessionStorage.data = {resultData};
   main.createMainController();
-  
+
   //Initialize the panel after data load
   panel.removeAll();
   const id = panel.addView();
@@ -131,15 +131,5 @@ async function processTSVData(fileName) {
   window.currentSessionStorage.viewInformation[id] = {plotVars};
   plotter.render(resultData, plotVars);
   panel.createControlPanel(id,resultData);
-  //Testing
-  const id1 = panel.addView();
-  const plotVars2 = plotter.initializeChart(id1, 460, 400);
-  //Define the variables
-  plotVars2.x ="tsne1"
-  plotVars2.y ="tsne1"
-  plotVars2.color ="stim"
-  window.currentSessionStorage.viewInformation[id1] = {plotVars: plotVars2};
-  plotter.render(resultData, plotVars2);
-  panel.createControlPanel(id1,resultData);
 
 }
