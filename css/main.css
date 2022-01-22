@@ -14,3 +14,14 @@
       cursor: pointer;
       font-size: large;
   }
+
+  .mainControllerPanel
+  {
+      margin-right: 5%;
+      margin-left:5%;
+  }
+
+  .visualizationContainer
+  {
+      margin-top:2%
+  }

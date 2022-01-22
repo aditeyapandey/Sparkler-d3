@@ -1,4 +1,7 @@
 (function () {
+  
+  main= {};
+
   const selectElement = document.querySelector(".file_inputSelect");
 
   selectElement.addEventListener("change", (event) => {
@@ -7,4 +10,11 @@
       processTSVData(fileSelected);
     }
   });
+
+  main.createMainController= function()
+  {
+    let div = d3.select(".mainControllerPanel").attr("class","mainControllerPanel border border-light").append("div").attr("class","container-md input-group mb-3 d-flex align-items-center m-3")
+    div.append("div").attr("class","input-group-prepend").append("button").attr("class", "btn btn-outline-secondary").text("Add Panel")
+  }
+
 })();
