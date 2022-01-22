@@ -57,17 +57,17 @@
       <h4>Sparkler Plotter d3.js</h4>
     </div>
     <div class="inputPanel container input-group mb-3 p-3">
-        <h3 class="container">
-            Data Input
-        </h3>    
-        <select class="file_inputSelect custom-select">
-            <option selected>Choose a File</option>
-            <option value="GSE96583_batch2.full.tsv">GSE96583_batch2.full.tsv</option>
-            <option value="GSE96583_batch2.sub.tsv">GSE96583_batch2.sub.tsv</option>
-        </select>
+      <h3 class="container">Data Input</h3>
+      <select class="file_inputSelect custom-select">
+        <option selected>Choose a File</option>
+        <option value="GSE96583_batch2.full.tsv">
+          GSE96583_batch2.full.tsv
+        </option>
+        <option value="GSE96583_batch2.sub.tsv">GSE96583_batch2.sub.tsv</option>
+      </select>
     </div>
     <div class="visualizationContainer">
-        <div id="my_dataviz"></div>
+      <div id="my_dataviz"></div>
     </div>
   </body>
 
@@ -76,8 +76,14 @@
     type="text/javascript"
     src="js/scatterplot.js"
   ></script>
+  <script
+    language="javascript"
+    type="text/javascript"
+    src="js/dataloader.js"
+  ></script>
   <script>
     plot.initializeChart("my_dataviz", 460, 400);
     plot.render("tsne1", "tsne2", "multiplets");
+    dataLoader.loadData();
   </script>
 </html>
