@@ -131,6 +131,16 @@ async function processTSVData(fileName) {
   window.currentSessionStorage.viewInformation[id] = {plotVars};
   plotter.render(resultData, plotVars);
   panel.createControlPanel(id,resultData);
+  //Testing
+  const id1 = panel.addView();
+  const plotVars2 = plotter.initializeChart(id1, 460, 400);
+  //Define the variables
+  plotVars2.x ="tsne1"
+  plotVars2.y ="tsne1"
+  plotVars2.color ="stim"
+  window.currentSessionStorage.viewInformation[id1] = {plotVars2};
+  plotter.render(resultData, plotVars2);
+  panel.createControlPanel(id1,resultData);
 //   const id1 = panel.addView();
 //   const plotVars2 = plotter.initializeChart(id1, 460, 400);
 //   plotter.render(resultData, plotVars2, "tsne1", "tsne1", "stim");

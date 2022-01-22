@@ -100,6 +100,7 @@
 
   function onchange() {
     let variableToUpdate = d3.select(this).attr("id").split("_")[1];
+    console.log(d3.select(this).attr("id"))
     let updatedValue = d3.select(this).property("value");
     let idOfRelatedDiv = d3.select(this).attr("id").split("_")[0];
     let plotVars =
