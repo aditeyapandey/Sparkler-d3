@@ -6,7 +6,6 @@
       const data = finalData.jsonData;
       const colorFieldDomain = [...finalData.metaData[colorField].range];
       const colorRange = finalData.metaData[colorField].colorMap;
-      console.log(colorRange)
 
       // Add X axis
       x = d3

@@ -123,7 +123,7 @@ async function processTSVData(fileName) {
   panel.removeAll();
   const id = panel.addView();
   const plotVars = plotter.initializeChart(id, 460, 400);
-  plotter.render(resultData, plotVars, "tsne1", "tsne2", "stim");
+  plotter.render(resultData, plotVars, "tsne1", "tsne1", "stim");
   panel.createControlPanel(id,resultData);
     // const plotVars2 = plotter.initializeChart("my_dataviz1", 460, 400);
     // plotter.render(resultData,plotVars2,"tsne1", "tsne2", "multiplets");

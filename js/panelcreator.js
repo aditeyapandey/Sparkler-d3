@@ -25,17 +25,17 @@
 
         //X Field
         containerDiv.append("div").attr("class","input-group-prepend").append("span").attr("class","input-group-text").text("X")
-        const selectX = containerDiv.append("select").attr("class","custom-select")
+        const selectX = containerDiv.append("select").attr("class","custom-select").property('value', 'tsne1')
         selectX.selectAll("option").data(dataForQuant).join("option").attr("value",d=>d).text(function (d) { return d; });
 
         //Y Field
         containerDiv.append("div").attr("class","input-group-prepend").append("span").attr("class","input-group-text").text("Y")
-        const selectY = containerDiv.append("select").attr("class","custom-select")
+        const selectY = containerDiv.append("select").attr("class","custom-select").property('value', 'tsne2')
         selectY.selectAll("option").data(dataForQuant).join("option").attr("value",d=>d).text(function (d) { return d; });
 
         //Group Field
         containerDiv.append("div").attr("class","input-group-prepend").append("span").attr("class","input-group-text").text("Group")
-        const selectG = containerDiv.append("select").attr("class","custom-select")
+        const selectG = containerDiv.append("select").attr("class","custom-select").property('value', 'stim')
         selectG.selectAll("option").data(dataForCat).join("option").attr("value",d=>d).text(function (d) { return d; });
 
     }
