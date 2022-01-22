@@ -2,10 +2,11 @@
 (function () {
   plot = {};
 
-  plot.render = function (plot,xField, yField, colorField) {
+  plot.render = function (plot, xField, yField, colorField) {
     //Read the data
     d3.tsv("data/GSE96583_batch2.sub.tsv").then(function (data) {
-      console.log(data);
+      
+
       // Add X axis
       x = d3
         .scaleLinear()
@@ -29,9 +30,7 @@
         .attr("id", "xAxisLabel")
         .attr("transform", `translate(0, ${plot.height})`);
 
-      const yAxisLabel = plot.svg.append("g").attr("id", "yAxisLabel")
-      ;
-
+      const yAxisLabel = plot.svg.append("g").attr("id", "yAxisLabel");
       xAxisLabel
         .append("text")
         .attr("class", "axis-label")
@@ -39,14 +38,14 @@
         .attr("y", 50)
         .text(xField);
 
-        yAxisLabel.append('text')
-        .attr('class', 'axis-label')
-        .attr('x', -plot.height / 2)
-        .attr('y', -30)
-        .attr('transform', `rotate(-90)`)
-        .style('text-anchor', 'middle')
+      yAxisLabel
+        .append("text")
+        .attr("class", "axis-label")
+        .attr("x", -plot.height / 2)
+        .attr("y", -30)
+        .attr("transform", `rotate(-90)`)
+        .style("text-anchor", "middle")
         .text(yField);
-  
 
       // Color scale: give me a specie name, I return a color
       color = d3
@@ -54,22 +53,43 @@
         .domain(["ctrl", "stim"])
         .range(["#440154ff", "#21908dff"]);
 
+      // Highlight the specie that is hovered
+      const highlight = function (event, d) {
+        const selected = d[colorField];
+
+        d3.select("#"+plot.visContainerId).selectAll(".dot")
+          .transition()
+          .duration(200)
+          .style("fill", "lightgrey")
+          .attr("r", 2);
+
+          d3.select("#"+plot.visContainerId).selectAll("." + selected)
+          .transition()
+          .duration(200)
+          .style("fill", color(selected))
+          .attr("r", 2);
+      };
+
       // Add dots
       plot.svg
         .append("g")
         .selectAll("dot")
         .data(data)
         .join("circle")
+        .attr("class", function (d) {
+          return `dot  + ${d[colorField]}`;
+        })
         .attr("cx", function (d) {
           return x(d[xField]);
         })
         .attr("cy", function (d) {
           return y(d[yField]);
         })
-        .attr("r", 5)
+        .attr("r", 2)
         .style("fill", function (d) {
-          return color(d.stim);
-        });
+          return color(d[colorField]);
+        })
+        .on("mouseover", highlight);
     });
   };
 
@@ -97,6 +117,6 @@
       .attr("preserveAspectRatio", "xMinYMin meet")
       .append("g")
       .attr("transform", `translate(${margin.left}, ${margin.top})`);
-    return {svg,width,height,x,y,color}  
+    return { svg, width, height, x, y, color, visContainerId };
   };
 })();
