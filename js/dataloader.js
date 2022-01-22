@@ -107,4 +107,8 @@ function dataProcessorInternal(rawData) {
 async function processTSVData(fileName) {
   const resultData = await cacheLookup(fileName);
   console.log(resultData);
+  const plotVars = plotter.initializeChart("my_dataviz", 460, 400);
+  plotter.render(resultData,plotVars,"tsne1", "tsne2", "stim");
+  const plotVars2 = plotter.initializeChart("my_dataviz1", 460, 400);
+  plotter.render(resultData,plotVars2,"tsne1", "tsne2", "stim");
 }

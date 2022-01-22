@@ -2,9 +2,8 @@
 (function () {
   plotter = {};
 
-  plotter.render = function (plot, xField, yField, colorField) {
-    //Read the data
-    d3.tsv("data/GSE96583_batch2.sub.tsv").then(function (data) {
+  plotter.render = function (finalData,plot, xField, yField, colorField) {
+      const data = finalData.jsonData;
       // Add X axis
       x = d3
         .scaleLinear()
@@ -72,7 +71,6 @@
         })
 
       plotter.createLegend(plot.visContainerId, color);
-    });
   };
 
   plotter.createLegend = function (divId, color) {
