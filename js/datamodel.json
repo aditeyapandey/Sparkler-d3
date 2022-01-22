@@ -1,0 +1,23 @@
+{
+    "jsonData": [{
+        "barcode": "AAACATACGCTTCC-1",
+        "tsne1": "-6.74039407642886",
+        "tsne2": "-23.9329848720015",
+        "sample": "1256",
+        "stim": "ctrl",
+        "cluster": "5",
+        "celltype": "CD4_T_cells",
+        "multiplets": "singlet"
+    }],
+    "metaData":{
+        "tsne1":{
+            "dTypeName":"quantitative",
+            "range":[0,100]
+        },
+        "stim":{
+            "dTypeName":"categorical",
+            "range":["ctrl","xyz"]
+        }
+    },
+    "controllerData":{"categorical":[],"quantitative":[]}
+}
