@@ -2,7 +2,7 @@
 
 This is a d3.js reimplmentation of Sparkler plotter (https://github.com/MrFlick/sparkler).  
 
-Tool: aditeyapandey.github.io/sparkler-d3/
+Tool: https://aditeyapandey.github.io/sparkler-d3/
 
 ## Setting up and running the code locally
 1. Clone the repo or download the zip file
