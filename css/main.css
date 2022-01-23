@@ -25,3 +25,9 @@
   {
       margin-top:2%
   }
+
+  .selected {
+    opacity: 1 !important;
+    stroke: black;
+    stroke-width: 1px;
+  }
