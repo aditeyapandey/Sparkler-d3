@@ -12,13 +12,9 @@ const GLOBAL_CACHE = {
   keyQueue: [],
   data: {},
 };
-/**
- * Looks up for file data in cache. If cache missed,
- * goes and loads the data of the file and updates the cache.
- *
- * @param {string} key: name of TSV file
- * @returns
- */
+
+// Looks up for file data in cache. If cache missed,
+ //goes and loads the data of the file and updates the cache.
 async function cacheLookup(key) {
   if (key in GLOBAL_CACHE.data) {
     console.log("CACHE HIT");
@@ -108,13 +104,7 @@ function dataProcessorInternal(rawData) {
  * Takes filename as the input and locates the filename
  * in data folder. Once located this method, massages the data
  * in the form defined in datamodel.json.
- *
- * After massaginging, this method calls the plotViz
- * downstream method.
- *
- *
- * @param {string} fileName
- */
+**/
 async function processTSVData(fileName) {
   const resultData = await cacheLookup(fileName);
   window.currentSessionStorage.data = {resultData};

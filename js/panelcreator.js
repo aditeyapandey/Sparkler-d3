@@ -21,10 +21,12 @@
 
   //Utility function to clear screen when file is changed
   panel.removeAll = function () {
+    //Clear the visualization panel
     d3.select(".visualizationContainer")
       .select(".containerRow")
       .selectAll("*")
       .remove();
+
     panelCounter = 0;
   };
 
