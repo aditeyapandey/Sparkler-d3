@@ -9,6 +9,10 @@
       width:25%
   }
 
+  .axis-label{
+      fill:black;
+  }
+
   .legendText
   {
       cursor: pointer;
