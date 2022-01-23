@@ -14,7 +14,9 @@
   // Creating a global menu for charts
   // This is where all the global level views will be configured
   main.createMainController = function () {
-    let div = d3
+    if(!window.currentSessionStorage.globalMenuLoaded)
+    {
+      let div = d3
       .select(".mainControllerPanel")
       .attr("class", "mainControllerPanel border border-light")
       .append("div")
@@ -31,6 +33,9 @@
       .text("Add Panel");
 
     d3.select("#addPanel").on("click", main.addNewPanel);
+    window.currentSessionStorage.globalMenuLoaded = true;
+    }
+
   };
 
   //Code to add a new panel  
