@@ -2,6 +2,7 @@
   panel = {};
   panelCounter = 0;
 
+  //Add a new panel to the chart
   panel.addView = function () {
     const currentPanelId = "dataviz" + panelCounter;
     let div = d3
@@ -18,6 +19,7 @@
     return currentPanelId;
   };
 
+  //Utility function to clear screen when file is changed
   panel.removeAll = function () {
     d3.select(".visualizationContainer")
       .select(".containerRow")
@@ -26,6 +28,7 @@
     panelCounter = 0;
   };
 
+  // Creating a local control panel for all divs 
   panel.createControlPanel = function (id, data) {
     const containerDiv = d3
       .select("#" + id)
@@ -98,6 +101,7 @@
       });
   };
 
+  //An event handler to handle change of local panels
   function onchange() {
     let variableToUpdate = d3.select(this).attr("id").split("_")[1];
     let updatedValue = d3.select(this).property("value");

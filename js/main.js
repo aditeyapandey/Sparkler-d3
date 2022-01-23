@@ -3,6 +3,7 @@
 
   const selectElement = document.querySelector(".file_inputSelect");
 
+  //Load Data and Render a View
   selectElement.addEventListener("change", (event) => {
     const fileSelected = event.target.value;
     if (fileSelected.endsWith(".tsv")) {
@@ -10,6 +11,8 @@
     }
   });
 
+  // Creating a global menu for charts
+  // This is where all the global level views will be configured
   main.createMainController = function () {
     let div = d3
       .select(".mainControllerPanel")
@@ -30,9 +33,8 @@
     d3.select("#addPanel").on("click", main.addNewPanel);
   };
 
+  //Code to add a new panel  
   main.addNewPanel = function () {
-    console.log("test")
-    //Testing
     let data = window.currentSessionStorage.data.resultData;
     const id = panel.addView();
     const plotVars = plotter.initializeChart(id, 460, 400);

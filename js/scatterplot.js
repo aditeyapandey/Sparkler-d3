@@ -2,6 +2,7 @@
 (function () {
   plotter = {};
 
+  //All the visualization rendering logic happens here
   plotter.render = function (finalData, plot) {
     const data = finalData.jsonData;
     const colorFieldDomain = [...finalData.metaData[plot.color].range];
@@ -71,7 +72,7 @@
         return color(d[plot.color]);
       });
 
-    // Add brushing
+    // Creating a brush inline to ensure the scope is maintained when recreating charts
     plot.svg.call(
       d3
         .brush() // Add the brush feature using the d3.brush function
@@ -96,45 +97,10 @@
       return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1; // This return TRUE or FALSE depending on if the points is in the selected area
     }
 
-    // // Set the zoom and Pan features: how much you can zoom, on which part, and what to do when there is a zoom
-    // var zoom = d3
-    //   .zoom()
-    //   .scaleExtent([0.5, 20]) // This control how much you can unzoom (x0.5) and zoom (x20)
-    //   .extent([
-    //     [0, 0],
-    //     [plot.width, plot.height],
-    //   ])
-    //    .on("zoom", updateChart);
-
-    // // This add an invisible rect on top of the chart area. This rect can recover pointer events: necessary to understand when the user zoom
-    // plot.svg.append("rect")
-    //   .attr("width", plot.width)
-    //   .attr("height", plot.height)
-    //   .style("fill", "none")
-    //   .style("pointer-events", "all")
-    //   // .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-    //   .call(zoom);
-
-    //   function updateChart() {
-
-    //     // recover the new scale
-    //     var newX = d3.event.transform.rescaleX(x);
-    //     var newY = d3.event.transform.rescaleY(y);
-
-    //     // update axes with these new boundaries
-    //     xAxis.call(d3.axisBottom(newX))
-    //     yAxis.call(d3.axisLeft(newY))
-
-    //     // update circle position
-    //     scatter
-    //       .selectAll("circle")
-    //       .attr('cx', function(d) {return newX(d.Sepal_Length)})
-    //       .attr('cy', function(d) {return newY(d.Petal_Length)});
-    //   }
-
     plotter.createLegend(plot.visContainerId, color);
   };
 
+  //A post hoc call to create legend
   plotter.createLegend = function (divId, color) {
     // Highlight
     const highlight = function (event, d) {
@@ -181,6 +147,7 @@
       .on("mouseout", doNotHighlight);
   };
 
+  //THis is called to initialize a new vis container
   plotter.initializeChart = function (
     visContainerId,
     containerWidth,
