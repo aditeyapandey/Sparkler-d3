@@ -7,5 +7,5 @@ This is a d3.js reimplmentation of Sparkler plotter (https://github.com/MrFlick/
 2. After cloning the repo follow the following steps:
 - `cd <reponame>`
 - `python3 -m http.server`
--  Go to localhost:<Portnumber>
+-  Go to `localhost:<Portnumber>`
  
